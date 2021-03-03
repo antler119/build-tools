@@ -1,0 +1,1 @@
+e init aaa -r E:\projects_third\aaa -i testing

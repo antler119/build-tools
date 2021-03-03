@@ -19,7 +19,7 @@ function createConfig(options) {
   const homedir = os.homedir();
 
   // build the `gn gen` args
-  const gn_args = [`import("//electron/build/args/${options.import}.gn")`];
+  const gn_args = [`import("//solution/build/args/${options.import}.gn")`];
 
   if (options.goma !== 'none') {
     gn_args.push(`import("${goma.gnFilePath}")`);
@@ -30,29 +30,17 @@ function createConfig(options) {
   if (options.msan) gn_args.push('is_msan=true');
   if (options.tsan) gn_args.push('is_tsan=true');
 
-  const electron = {
+  const solution = {
     origin: options.useHttps
-      ? 'https://github.com/electron/electron.git'
-      : 'git@github.com:electron/electron.git',
-    ...(options.fork && {
-      fork: options.useHttps
-        ? `https://github.com/${options.fork}.git`
-        : `git@github.com:${options.fork}.git`,
-    }),
-  };
-
-  const node = {
-    origin: options.useHttps
-      ? 'https://github.com/electron/node.git'
-      : 'git@github.com:electron/node.git',
+      ? 'https://gitee.com/antler/test_gn_project.git'
+      : 'git@gitee.com:antler/test_gn_project.git',
   };
 
   return {
     goma: options.goma,
     root,
     remotes: {
-      electron,
-      node,
+      solution,
     },
     gen: {
       args: gn_args,
@@ -75,9 +63,9 @@ function runGClientConfig(config) {
     'gclient.py',
     'config',
     '--name',
-    'src/electron',
+    'src/solution',
     '--unmanaged',
-    'https://github.com/electron/electron',
+    'https://gitee.com/antler/test_gn_project.git',
   ];
   const opts = {
     cwd: root,
@@ -114,11 +102,11 @@ program
   .option(
     '-r, --root <path>',
     'Source and build files will be stored in this new directory',
-    path.resolve(process.cwd(), 'electron'),
+    path.resolve(process.cwd(), 'solution'),
   )
   .option(
     '-i, --import <name>',
-    'Import build settings from $root/src/electron/build/args/$import.gn',
+    'Import build settings from $root/src/solution/build/args/$import.gn',
     'testing',
   )
   .option('-o, --out <name>', 'Built files will be placed in $root/src/out/$out')
@@ -130,17 +118,13 @@ program
   .option('--bootstrap', 'Run `e sync` and `e build` after creating the build config.')
   .option(
     '--goma <target>',
-    `Use Electron's custom deployment of Goma.  Can be "cache-only", "cluster" or "none".  The "cluster" mode is only available to maintainers`,
+    `Use Solution's custom deployment of Goma.  Can be "cache-only", "cluster" or "none".  The "cluster" mode is only available to maintainers`,
     'cache-only',
   )
   .option(
     '--use-https',
     'During `e sync`, set remote origins with https://github... URLs instead of git@github...',
     false,
-  )
-  .option(
-    '--fork <username/electron>',
-    `Add a remote fork of Electron with the name 'fork'. This should take the format 'username/electron'`,
   )
   .parse(process.argv);
 
@@ -206,7 +190,7 @@ try {
     goma.auth(config);
   }
 
-  // (maybe) build Electron
+  // (maybe) build Solution
   if (program.bootstrap) {
     childProcess.execFileSync(process.execPath, [e, 'build'], opts);
   }

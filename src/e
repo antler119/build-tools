@@ -58,7 +58,7 @@ function maybeCheckForUpdates() {
 
 maybeCheckForUpdates();
 
-program.description('Electron build tool').usage('<command> [commandArgs...]');
+program.description('GN build tool').usage('<command> [commandArgs...]');
 
 program
   .command('init [options] <name>', 'Create a new build config')

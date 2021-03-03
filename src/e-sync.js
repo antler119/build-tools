@@ -11,21 +11,6 @@ const depot = require('./utils/depot-tools');
 
 function setRemotes(cwd, repo) {
   for (const remote in repo) {
-    // First check that the fork remote exists.
-    if (remote === 'fork') {
-      const remotes = cp
-        .execSync('git remote', { cwd })
-        .toString()
-        .trim()
-        .split('\n');
-
-      // If we've not added the fork remote, add it instead of updating the url.
-      if (!remotes.includes('fork')) {
-        cp.execSync(`git remote add ${remote} ${repo[remote]}`, { cwd });
-        break;
-      }
-    }
-
     cp.execSync(`git remote set-url ${remote} ${repo[remote]}`, { cwd });
     cp.execSync(`git remote set-url --push ${remote} ${repo[remote]}`, { cwd });
   }
@@ -53,11 +38,9 @@ function runGClientSync(config, syncArgs, syncOpts) {
   };
   depot.execFileSync(config, exec, args, opts);
 
-  const electronPath = path.resolve(srcdir, 'electron');
-  const nodejsPath = path.resolve(srcdir, 'third_party', 'electron_node');
+  const solutionPath = path.resolve(srcdir, 'solution');
 
-  setRemotes(electronPath, config.remotes.electron);
-  setRemotes(nodejsPath, config.remotes.node);
+  setRemotes(solutionPath, config.remotes.solution);
 }
 
 const opts = program
