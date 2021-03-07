@@ -47,7 +47,7 @@ function platformOpts() {
   switch (os.platform()) {
     case 'win32':
       opts = {
-        DEPOT_TOOLS_WIN_TOOLCHAIN: '1',
+        DEPOT_TOOLS_WIN_TOOLCHAIN: '0', // use local virtual studio
         DEPOT_TOOLS_WIN_TOOLCHAIN_BASE_URL:
           'https://electron-build-tools.s3-us-west-2.amazonaws.com/win32/toolchains/_',
         GYP_MSVS_HASH_9ff60e43ba91947baca460d0ca3b1b980c3a2c23:
