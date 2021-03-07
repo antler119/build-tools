@@ -3,7 +3,7 @@ const path = require('path');
 
 const createSandbox = require('./sandbox');
 
-describe('e-init', () => {
+describe('g-init', () => {
   let sandbox;
   beforeEach(() => {
     sandbox = createSandbox();

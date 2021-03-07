@@ -4,15 +4,15 @@
 # (You may need to mkdir that completions/ directory.)
 #
 # If you're not using oh-my-zsh, you may need to add this to your ~/.zshrc:
-# source /path/to/_e
+# source /path/to/_g
 # autoload -U compinit && compinit
 #
 # To force zsh to regenerate completions, you can `rm -f ~/.zcompdump`
 
-declare -a __e_options=()
+declare -a __g_options=()
 # call `cmd --help`, parse out the option names,
-# and store in __e_options global
-function __e_get_cmd_options() {
+# and store in __g_options global
+function __g_get_cmd_options() {
   local -a options=()
   "$@" --help | \
     awk '/^Options:/{flag=1;next}/^$/{flag=0}flag' | \
@@ -22,13 +22,13 @@ function __e_get_cmd_options() {
     while read -r option; do
       options+=($option)
     done
-  __e_options=($options[@])
+  __g_options=($options[@])
 }
 
-declare -a __e_subcommands=()
+declare -a __g_subcommands=()
 # call `cmd --help`, parse out the command names,
-# and store in __e_subcommands global
-function __e_get_cmd_subcommands() {
+# and store in __g_subcommands global
+function __g_get_cmd_subcommands() {
   local -a subcommands=()
   "$@" --help | \
   awk '/^Commands:/{flag=1;next}/^$/{flag=0}flag' | \
@@ -38,13 +38,13 @@ function __e_get_cmd_subcommands() {
   while read -r subcommand; do
     subcommands+=($subcommand)
   done
-  __e_subcommands=("$subcommands[@]")
+  __g_subcommands=("$subcommands[@]")
 }
 
-declare -a __e_configs=()
+declare -a __g_configs=()
 # call `e show configs`, parse out the config names,
-# and store in __e_configs global
-function __e_get_configs() {
+# and store in __g_configs global
+function __g_get_configs() {
   local -a configs=()
   e show configs | \
   sed 's/..//' | \
@@ -52,46 +52,46 @@ function __e_get_configs() {
   while read -r configname; do
     configs+=($configname)
   done
-  __e_configs=("$configs[@]")
+  __g_configs=("$configs[@]")
 }
 
-declare -a __e_targets=()
+declare -a __g_targets=()
 # call `e build --list-targets`, parse out the target names,
-# and store in __e_targets global
-function __e_get_targets() {
+# and store in __g_targets global
+function __g_get_targets() {
   local -a targets=()
   e build --list-targets | \
   sort | \
   while read -r target; do
     targets+=($target)
   done
-  __e_targets=("$targets[@]")
+  __g_targets=("$targets[@]")
 }
 
-__e_get_cmd_subcommands e
-__e_get_cmd_options e
+__g_get_cmd_subcommands e
+__g_get_cmd_options e
 declare line
 
 _arguments -C \
-  '1: :($__e_subcommands $__e_options)' \
+  '1: :($__g_subcommands $__g_options)' \
   '*::arg:->args' \
 && ret=0
 
 case $line[1] in
   (use)
-    __e_get_configs
+    __g_get_configs
     _arguments -C \
-      '1: :($__e_configs)' \
+      '1: :($__g_configs)' \
       '*::arg:->args' \
     && ret=0
   ;;
 
   (build|make)
-    __e_get_targets
-    __e_get_cmd_subcommands e $line[1]
-    __e_get_cmd_options e $line[1]
+    __g_get_targets
+    __g_get_cmd_subcommands e $line[1]
+    __g_get_cmd_options e $line[1]
     _arguments -C \
-      '1: :("${__e_targets[@]}" $__e_subcommands $__e_options)' \
+      '1: :("${__g_targets[@]}" $__g_subcommands $__g_options)' \
       '*::arg:->args' \
     && ret=0
   ;;
@@ -104,10 +104,10 @@ case $line[1] in
   ;;
 
   (*)
-    __e_get_cmd_subcommands e $line[1]
-    __e_get_cmd_options e $line[1]
+    __g_get_cmd_subcommands e $line[1]
+    __g_get_cmd_options e $line[1]
     _arguments -C \
-      '1: :($__e_subcommands $__e_options)' \
+      '1: :($__g_subcommands $__g_options)' \
       '*::arg:->args' \
     && ret=0
   ;;

@@ -112,10 +112,10 @@ try {
     const result = depot.spawnSync(
       config,
       process.execPath,
-      [path.resolve(__dirname, 'e-load-xcode.js'), '--quiet'],
+      [path.resolve(__dirname, 'g-load-xcode.js'), '--quiet'],
       {
         stdio: 'inherit',
-        msg: `Running ${color.cmd('e load-xcode --quiet')}`,
+        msg: `Running ${color.cmd('g load-xcode --quiet')}`,
       },
     );
     if (result.status !== 0) process.exit(result.status);

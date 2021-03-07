@@ -3,4 +3,4 @@
 setlocal
 
 :: Defer Control.
-node "%~dp0\e" %*
+node "%~dp0\g" %*

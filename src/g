@@ -36,7 +36,7 @@ function maybeCheckForUpdates() {
   // NB: send updater's stdout to stderr so its log messages are visible
   // but don't pollute stdout. For example, calling `FOO="$(e show exec)"`
   // should not get a FOO that includes "Checking for build-tools updates".
-  childProcess.spawnSync(process.execPath, ['e-auto-update.js'], {
+  childProcess.spawnSync(process.execPath, ['g-auto-update.js'], {
     cwd: __dirname,
     stdio: [0, 2, 2],
   });

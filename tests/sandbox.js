@@ -55,7 +55,7 @@ const buildToolsSrcDir = path.resolve(__dirname, '..', 'src');
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eInitRunner(execOptions) {
   const stdio = 'pipe';
-  const cmd = path.resolve(buildToolsSrcDir, 'e-init.js');
+  const cmd = path.resolve(buildToolsSrcDir, 'g-init.js');
   const args = [];
 
   const o = {
@@ -104,7 +104,7 @@ function eInitRunner(execOptions) {
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eMakeRunner(execOptions) {
   let stdio = 'inherit'; // runs a really long time, so dump output to parent
-  const cmd = path.resolve(buildToolsSrcDir, 'e-build.js');
+  const cmd = path.resolve(buildToolsSrcDir, 'g-build.js');
   const args = [];
 
   const o = {
@@ -130,7 +130,7 @@ function eMakeRunner(execOptions) {
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eShowRunner(execOptions) {
   const stdio = 'pipe';
-  const cmd = path.resolve(buildToolsSrcDir, 'e-show.js');
+  const cmd = path.resolve(buildToolsSrcDir, 'g-show.js');
   const args = [];
 
   const o = {
@@ -188,7 +188,7 @@ function eShowRunner(execOptions) {
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eSyncRunner(execOptions) {
   let stdio = 'inherit'; // runs a really long time, so dump output to parent
-  const cmd = path.resolve(buildToolsSrcDir, 'e-sync.js');
+  const cmd = path.resolve(buildToolsSrcDir, 'g-sync.js');
   const args = [];
 
   const o = {

@@ -10,8 +10,8 @@
     "none"
   ],
   "collectCoverageFrom": [
-    "src/e",
-    "src/e-*js"
+    "src/g",
+    "src/g-*js"
   ],
   "coveragePathIgnorePatterns": [
     "/node_modules/",

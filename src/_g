@@ -7,19 +7,19 @@
 # autoload -U compinit
 # compinit
 
-#compdef _e e
+#compdef _g g
 
-__e_commands () {
+__g_commands () {
   e -h | grep -A999 '^Commands:' | tail --lines=+2 | sed 's/^  //' | cut -f1 -d' ' | sed 's/[|\n]/ /'
 }
 
 # Caches variables in __e_all_commands.
-__e_compute_all_commands () {
+__g_compute_all_commands () {
   test -n "$__e_all_commands" ||
   __e_all_commands="$(__e_commands)"
 }
 
-_e () {
+_g () {
   local line
 
   _arguments -C \

@@ -1,1 +1,1 @@
-e init aaa -r E:\projects_third\aaa -i testing
+g init aaa -r E:\projects_third\aaa -i testing

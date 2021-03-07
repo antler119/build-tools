@@ -3,7 +3,7 @@ const path = require('path');
 const pathKey = require('path-key');
 const createSandbox = require('./sandbox');
 
-describe('e-show', () => {
+describe('g-show', () => {
   let sandbox;
   let root;
   let name;
