@@ -27,7 +27,7 @@ function runGClientSync(config, syncArgs, syncOpts) {
   depot.ensure();
 
   const exec = 'python';
-  const args = ['gclient.py', 'sync', '--no-history', '-vv', ...syncArgs];
+  const args = ['gclient.py', 'sync', '--no-history', '--nohooks', '-vv', ...syncArgs];
   const opts = {
     cwd: srcdir,
     env: syncOpts.threeWay
