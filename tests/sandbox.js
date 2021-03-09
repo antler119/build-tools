@@ -49,7 +49,7 @@ function runSync(args, options) {
 
 const buildToolsSrcDir = path.resolve(__dirname, '..', 'src');
 
-// An `e init` helper.
+// An `g init` helper.
 // Example use: result = eInitRunner().root('~/electron-src')
 //   .name('master-testing').import('testing').run();
 // Returns { exitCode:number, stderr:string, stdout:string }
@@ -99,7 +99,7 @@ function eInitRunner(execOptions) {
   return o;
 }
 
-// An `e build` helper.
+// An `g build` helper.
 // Example use: result = eMakeRunner().run();
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eMakeRunner(execOptions) {
@@ -125,7 +125,7 @@ function eMakeRunner(execOptions) {
   return o;
 }
 
-// An `e show` helper.
+// An `g show` helper.
 // Example use: result = eShowRunner().src('base').run();
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eShowRunner(execOptions) {
@@ -183,7 +183,7 @@ function eShowRunner(execOptions) {
   return o;
 }
 
-// An `e sync` helper.
+// An `g sync` helper.
 // Example use: result = eSyncRunner().run(); // not many options in this one!
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eSyncRunner(execOptions) {
@@ -200,12 +200,12 @@ function eSyncRunner(execOptions) {
   return o;
 }
 
-// An `e remove` helper.
+// An `g remove` helper.
 // Example use: result = eRemoveRunner().name('test').run();
 // Returns { exitCode:number, stderr:string, stdout:string }
 function eRemoveRunner(execOptions) {
   const stdio = 'pipe';
-  const cmd = path.resolve(buildToolsSrcDir, 'e');
+  const cmd = path.resolve(buildToolsSrcDir, 'g');
   const args = ['remove'];
 
   const o = {
@@ -231,7 +231,7 @@ function createSandbox() {
   const execOptions = {
     encoding: 'utf8',
     env: {
-      // have `e` use our test sandbox's build-tools config dir
+      // have `g` use our test sandbox's build-tools config dir
       EVM_CONFIG: evm_config_dir,
 
       [pathKey]: process.env[pathKey],

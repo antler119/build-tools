@@ -21,7 +21,7 @@ describe('g-init', () => {
       expect(!fs.existsSync(root)).toStrictEqual(true);
       expect(!fs.existsSync(gclient_file)).toStrictEqual(true);
 
-      // run `e init` with a user-specified root
+      // run `g init` with a user-specified root
       const result = sandbox
         .eInitRunner()
         .root(root)
@@ -72,7 +72,7 @@ describe('g-init', () => {
     it('logs an info message when the new build config root already has a .gclient file', () => {
       const root = path.resolve(sandbox.tmpdir, 'master');
 
-      // run `e init` twice on the same directory with two names
+      // run `g init` twice on the same directory with two names
       let result;
       result = sandbox
         .eInitRunner()
@@ -97,7 +97,7 @@ describe('g-init', () => {
       fs.mkdirSync(existingDir);
       fs.writeFileSync(path.resolve(existingDir, 'world.txt'), 'hello-exists-and-is-not-empty');
 
-      // run `e init` with a nonempty root directory
+      // run `g init` with a nonempty root directory
       const result = sandbox
         .eInitRunner()
         .root(existingDir)
@@ -111,7 +111,7 @@ describe('g-init', () => {
   });
 
   it('fails if a build configuration name is not specified', () => {
-    // run `e init` without a build config name
+    // run `g init` without a build config name
     const result = sandbox.eInitRunner().run();
 
     // confirm that it errored out and gave a Help message
@@ -120,7 +120,7 @@ describe('g-init', () => {
   });
 
   it('does not overwrite existing configs unless --force', () => {
-    // confirm that `e init` with the same name twice doesn't work...
+    // confirm that `g init` with the same name twice doesn't work...
     const root = path.resolve(sandbox.tmpdir, 'master');
     let result;
     result = sandbox
@@ -151,7 +151,7 @@ describe('g-init', () => {
     const cwd = process.cwd();
     process.chdir(sandbox.tmpdir);
 
-    // run `e init` without specifying a root
+    // run `g init` without specifying a root
     sandbox
       .eInitRunner()
       .name('name')

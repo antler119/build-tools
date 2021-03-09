@@ -34,7 +34,7 @@ function maybeCheckForUpdates() {
   // Run the updater script.
   //
   // NB: send updater's stdout to stderr so its log messages are visible
-  // but don't pollute stdout. For example, calling `FOO="$(e show exec)"`
+  // but don't pollute stdout. For example, calling `FOO="$(g show exec)"`
   // should not get a FOO that includes "Checking for build-tools updates".
   childProcess.spawnSync(process.execPath, ['g-auto-update.js'], {
     cwd: __dirname,
@@ -87,9 +87,9 @@ program
     console.log('');
     console.log('Examples:');
     console.log('');
-    console.log('  $ e start .');
-    console.log('  $ e start /path/to/app');
-    console.log('  $ e start /path/to/app --js-flags');
+    console.log('  $ g start .');
+    console.log('  $ g start /path/to/app');
+    console.log('  $ g start /path/to/app --js-flags');
   });
 
 program
@@ -114,15 +114,15 @@ program
     console.log('');
     console.log('Examples:');
     console.log('');
-    console.log('  $ e node .');
-    console.log('  $ e node /path/to/app');
+    console.log('  $ g node .');
+    console.log('  $ g node /path/to/app');
   });
 
 program.command('debug', 'Run the Electron build with a debugger (gdb or lldb)');
 
 program
   .command('use <name>')
-  .description('Use build config <name> when running other `e` commands')
+  .description('Use build config <name> when running other `g` commands')
   .action(name => {
     try {
       evmConfig.setCurrent(name);
@@ -192,7 +192,7 @@ program
   .action(() => {
     const args = process.argv.slice(3);
     if (args.length === 0) {
-      console.error(`${color.err} Must provide a command to 'e depot-tools'`);
+      console.error(`${color.err} Must provide a command to 'g depot-tools'`);
       process.exit(1);
     }
     let cwd;

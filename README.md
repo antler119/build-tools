@@ -1,4 +1,4 @@
-# Electron Build Tools
+# GN Build Tools
 
 This repository contains helper/wrapper scripts to make building Electron easier.
 

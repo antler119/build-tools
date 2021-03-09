@@ -187,7 +187,7 @@ function sanitizeConfig(name, overwrite = false) {
     } else {
       console.warn(`${color.warn} We've made these temporary changes to your configuration:`);
       console.warn(changes.map(change => ` * ${change}`).join('\n'));
-      console.warn(`Run ${color.cmd('e sanitize-config')} to make these changes permanent.`);
+      console.warn(`Run ${color.cmd('g sanitize-config')} to make these changes permanent.`);
     }
   }
 

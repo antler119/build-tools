@@ -71,7 +71,7 @@ program
     try {
       const names = evmConfig.names();
       if (names.length === 0) {
-        console.log('No build configs found. (You can create one with `e init`)');
+        console.log('No build configs found. (You can create one with `g init`)');
       } else {
         names
           .sort()
@@ -141,11 +141,11 @@ program
 
 program
   .command('src [name]')
-  .description('Path of the named (default:electron) src directory e.g. "/$root/src/electron"')
+  .description('Path of the named (default:soluton) src directory e.g. "/$root/src/soluton"')
   .action(name => {
     try {
       const { root } = evmConfig.current();
-      name = name || 'electron';
+      name = name || 'soluton';
       console.log(color.path(path.resolve(root, 'src', name)));
     } catch (e) {
       fatal(e);

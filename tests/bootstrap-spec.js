@@ -20,7 +20,7 @@ describe('full-test', () => {
   });
 
   it('syncs and builds', () => {
-    // run `e init` to create a new config
+    // run `g init` to create a new config
     sandbox
       .eInitRunner()
       .root(root)
@@ -33,7 +33,7 @@ describe('full-test', () => {
       .run().stdout;
     expect(current).toStrictEqual(name);
 
-    // run `e sync` to get the source
+    // run `g sync` to get the source
     let result = sandbox.eSyncRunner().run();
     expect(result.exitCode).toStrictEqual(0);
 
@@ -46,7 +46,7 @@ describe('full-test', () => {
     expect(srcdir).toEqual(expected);
     expect(fs.statSync(srcdir).isDirectory()).toStrictEqual(true);
 
-    // run `e make`
+    // run `g make`
     result = sandbox.eMakeRunner().run();
     expect(result.exitCode).toStrictEqual(0);
 

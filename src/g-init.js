@@ -66,6 +66,7 @@ function runGClientConfig(config) {
     'src/solution',
     '--unmanaged',
     'https://gitee.com/antler/test_gn_project.git',
+    // 'git@gitee.com:antler/test_gn_project.git',
   ];
   const opts = {
     cwd: root,
@@ -115,7 +116,7 @@ program
   .option('--tsan', `When building, enable clang's thread sanitizer`, false)
   .option('--msan', `When building, enable clang's memory sanitizer`, false)
   .option('--lsan', `When building, enable clang's leak sanitizer`, false)
-  .option('--bootstrap', 'Run `e sync` and `e build` after creating the build config.')
+  .option('--bootstrap', 'Run `g sync` and `g build` after creating the build config.')
   .option(
     '--goma <target>',
     `Use Solution's custom deployment of Goma.  Can be "cache-only", "cluster" or "none".  The "cluster" mode is only available to maintainers`,
@@ -123,7 +124,7 @@ program
   )
   .option(
     '--use-https',
-    'During `e sync`, set remote origins with https://github... URLs instead of git@github...',
+    'During `g sync`, set remote origins with https://github... URLs instead of git@github...',
     false,
   )
   .parse(process.argv);
@@ -175,14 +176,14 @@ try {
   evmConfig.save(name, config);
   console.log(`New build config ${color.config(name)} created in ${color.path(filename)}`);
 
-  // `e use` the new config
-  const e = path.resolve(__dirname, 'e');
+  // `g use` the new config
+  const g = path.resolve(__dirname, 'g');
   const opts = { stdio: 'inherit' };
-  childProcess.execFileSync(process.execPath, [e, 'use', name], opts);
+  childProcess.execFileSync(process.execPath, [g, 'use', name], opts);
 
   // (maybe) run sync to ensure external binaries are downloaded
   if (program.bootstrap) {
-    childProcess.execFileSync(process.execPath, [e, 'sync', '-v'], opts);
+    childProcess.execFileSync(process.execPath, [g, 'sync', '-v'], opts);
   }
 
   // maybe authenticate with Goma
@@ -192,7 +193,7 @@ try {
 
   // (maybe) build Solution
   if (program.bootstrap) {
-    childProcess.execFileSync(process.execPath, [e, 'build'], opts);
+    childProcess.execFileSync(process.execPath, [g, 'build'], opts);
   }
 } catch (e) {
   fatal(e);

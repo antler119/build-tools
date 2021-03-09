@@ -1,4 +1,4 @@
-#compdef e
+#compdef g
 
 # For oh-my-zsh, install this in $ZSH/completions/ or ~/.oh-my-zsh/completions/
 # (You may need to mkdir that completions/ directory.)
@@ -42,11 +42,11 @@ function __g_get_cmd_subcommands() {
 }
 
 declare -a __g_configs=()
-# call `e show configs`, parse out the config names,
+# call `g show configs`, parse out the config names,
 # and store in __g_configs global
 function __g_get_configs() {
   local -a configs=()
-  e show configs | \
+  g show configs | \
   sed 's/..//' | \
   sort | \
   while read -r configname; do
@@ -56,11 +56,11 @@ function __g_get_configs() {
 }
 
 declare -a __g_targets=()
-# call `e build --list-targets`, parse out the target names,
+# call `g build --list-targets`, parse out the target names,
 # and store in __g_targets global
 function __g_get_targets() {
   local -a targets=()
-  e build --list-targets | \
+  g build --list-targets | \
   sort | \
   while read -r target; do
     targets+=($target)
@@ -68,8 +68,8 @@ function __g_get_targets() {
   __g_targets=("$targets[@]")
 }
 
-__g_get_cmd_subcommands e
-__g_get_cmd_options e
+__g_get_cmd_subcommands g
+__g_get_cmd_options g
 declare line
 
 _arguments -C \
@@ -88,15 +88,15 @@ case $line[1] in
 
   (build|make)
     __g_get_targets
-    __g_get_cmd_subcommands e $line[1]
-    __g_get_cmd_options e $line[1]
+    __g_get_cmd_subcommands g $line[1]
+    __g_get_cmd_options g $line[1]
     _arguments -C \
       '1: :("${__g_targets[@]}" $__g_subcommands $__g_options)' \
       '*::arg:->args' \
     && ret=0
   ;;
 
-  # in 'e start' / 'e node',
+  # in 'g start' / 'g node',
   # try file completion on remaining args
   (start|run|node)
     _path_files \
@@ -104,8 +104,8 @@ case $line[1] in
   ;;
 
   (*)
-    __g_get_cmd_subcommands e $line[1]
-    __g_get_cmd_options e $line[1]
+    __g_get_cmd_subcommands g $line[1]
+    __g_get_cmd_options g $line[1]
     _arguments -C \
       '1: :($__g_subcommands $__g_options)' \
       '*::arg:->args' \
