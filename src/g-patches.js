@@ -53,7 +53,7 @@ function exportPatches(target) {
 program
   .arguments('<target>')
   .description(
-    "Refresh all patches if 'all' is specified; otherwise, refresh patches in $root/src/electron/patches/$target",
+    "Refresh all patches if 'all' is specified; otherwise, refresh patches in $root/src/solution/patches/$target",
   )
   .action(exportPatches)
   .parse(process.argv);

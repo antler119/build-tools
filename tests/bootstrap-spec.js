@@ -37,12 +37,12 @@ describe('full-test', () => {
     let result = sandbox.eSyncRunner().run();
     expect(result.exitCode).toStrictEqual(0);
 
-    // confirm that we got the code src/electron exists
+    // confirm that we got the code src/solution exists
     const srcdir = sandbox
       .eShowRunner()
       .src()
       .run().stdout;
-    let expected = path.resolve(root, 'src', 'electron');
+    let expected = path.resolve(root, 'src', 'solution');
     expect(srcdir).toEqual(expected);
     expect(fs.statSync(srcdir).isDirectory()).toStrictEqual(true);
 
