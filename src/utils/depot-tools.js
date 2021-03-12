@@ -25,7 +25,8 @@ function ensureDepotTools() {
   // if it doesn't exist, create it
   if (!fs.existsSync(depot_dir)) {
     console.log(`Cloning ${color.cmd('depot_tools')} into ${color.path(depot_dir)}`);
-    const url = 'https://chromium.googlesource.com/chromium/tools/depot_tools.git';
+    // const url = 'https://chromium.googlesource.com/chromium/tools/depot_tools.git';
+    const url = 'https://gitee.com/antler/depot_tools.git';
     childProcess.execFileSync('git', ['clone', '-q', url, depot_dir], { stdio: 'inherit' });
     updateDepotTools();
   }
